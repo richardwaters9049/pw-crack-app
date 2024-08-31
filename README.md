@@ -91,4 +91,14 @@ This approach ensures that the application uses a comprehensive and up-to-date s
 - **Setup Instructions**: Steps to get the project running on a local machine.
 - **Contributing and License**: Information on contributing and licensing.
 
-Feel free to adjust any details according to your specific setup or preferences.
+### Conclusion
+
+This project serves as a practical demonstration of password cracking techniques and their implications in cybersecurity. By understanding these techniques, we can better appreciate the importance of strong and unique passwords in protecting our digital assets.
+
+### Future Enhancements
+
+- **Multithreading**: Implement multithreading to further speed up the brute-force attack.
+- **User Authentication**: Implement user authentication to allow users to save their passwords and view their cracking history.
+- **Password Strength Checker**: Integrate a password strength checker to encourage users to use more secure passwords.
+- **Password Hashing**: Use a more secure hashing algorithm for password storage.
+- **Error Handling**: Improve error handling and user feedback for a better user experience.
