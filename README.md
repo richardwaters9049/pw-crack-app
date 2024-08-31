@@ -76,3 +76,19 @@ This approach ensures that the application uses a comprehensive and up-to-date s
    ```
 5. **Access the Web Interface**:
    Open a web browser and navigate to http://127.0.0.1:5000
+
+### Acknowledgments
+
+SecLists: For providing the extensive password list used in the dictionary attack.
+Flask: For the web framework.
+Tailwind CSS: For the styling framework.
+
+### Summary
+
+- **Project Overview**: Brief introduction to the project.
+- **Application Description**: Details on what the application does and its relevance to cybersecurity.
+- **Implementation**: How the GitHub link is used and the types of attacks implemented.
+- **Setup Instructions**: Steps to get the project running on a local machine.
+- **Contributing and License**: Information on contributing and licensing.
+
+Feel free to adjust any details according to your specific setup or preferences.
