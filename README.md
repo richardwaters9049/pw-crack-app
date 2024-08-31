@@ -79,9 +79,9 @@ This approach ensures that the application uses a comprehensive and up-to-date s
 
 ### Acknowledgments
 
-SecLists: For providing the extensive password list used in the dictionary attack.
-Flask: For the web framework.
-Tailwind CSS: For the styling framework.
+- **SecLists**: For providing the extensive password list used in the dictionary attack.
+- **Flask**: For the web framework.
+- **Tailwind CSS**: For the styling framework.
 
 ### Summary
 
