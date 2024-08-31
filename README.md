@@ -11,6 +11,10 @@ The application allows users to input a password and then attempts to crack it b
 1. **Dictionary Attack**: Uses a large list of common passwords fetched from an online source.
 2. **Brute-Force Attack**: Iterates through all possible combinations of characters to find a match, leveraging parallel processing to speed up the process.
 
+## Character Type Optimization
+
+A character type analysis has been implemented to improve the efficiency of the brute-force attack. This enhancement involves analyzing the password to determine if it contains only letters, only digits, or a combination of both. Based on this analysis, the application narrows down the brute-force search space to a specific set of characters, significantly reducing the time required to crack the password. This optimization is particularly effective for passwords with uniform character types, helping to demonstrate the importance of diverse character usage in password creation.
+
 ### How It Relates to Cybersecurity
 
 This application showcases fundamental techniques in cybersecurity related to password cracking:

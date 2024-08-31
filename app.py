@@ -1,127 +1,108 @@
-from flask import Flask, request, render_template
-import hashlib
 import itertools
 import string
-import requests
-import multiprocessing
+import hashlib
 import time
-
+from multiprocessing import Pool, cpu_count
+import requests
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# URL to the large password list
+# Constants
 PASSWORD_LIST_URL = "https://raw.githubusercontent.com/danielmiessler/SecLists/master/Passwords/xato-net-10-million-passwords-1000000.txt"
 
 
-def fetch_passwords_from_url(url):
+def check_password_type(password):
     """
-    Fetches a list of passwords from a provided URL.
+    Analyze the password to determine its character composition.
+    Returns the appropriate character set based on the composition.
     """
-    try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()  # Raise HTTPError for bad responses
-        # Return passwords as a list of strings
-        return response.text.splitlines()
-    except requests.RequestException as e:
-        print(f"Error fetching password list: {e}")
-        return []
+    if password.isdigit():
+        return string.digits  # Only digits
+    elif password.isalpha():
+        return string.ascii_letters  # Only letters
+    elif password.isalnum():
+        return string.ascii_letters + string.digits  # Letters and digits
+    else:
+        return string.printable  # All possible characters
 
 
-def dictionary_attack(password_hash, method="md5", url=PASSWORD_LIST_URL):
+def hash_password(password, method="md5"):
     """
-    Attempts to crack the password using a dictionary attack with passwords from an online URL.
+    Hash a password using the specified method.
     """
-    passwords = fetch_passwords_from_url(url)
-    for word in passwords:
-        word = word.strip()
-        # Compare the hash of the password with the target hash
-        if hashlib.md5(word.encode("utf-8")).hexdigest() == password_hash:
-            return word
+    if method == "md5":
+        return hashlib.md5(password.encode()).hexdigest()
+    else:
+        raise ValueError("Unsupported hash method")
+
+
+def dictionary_attack(hashed_password, method):
+    """
+    Perform a dictionary attack using an online password list.
+    """
+    response = requests.get(PASSWORD_LIST_URL)
+    common_passwords = response.text.splitlines()
+
+    for password in common_passwords:
+        if hash_password(password, method) == hashed_password:
+            return password
     return None
 
 
-def worker(chars, password_hash, method, length, start, end, return_dict, index):
+def brute_force_attack(hashed_password, char_set, max_length, method):
     """
-    Worker function for brute-force password cracking using multiple processes.
+    Perform a brute-force attack using the specified character set.
     """
-    for guess in itertools.product(chars, repeat=length):
-        guess_str = "".join(guess)
-        if hashlib.md5(guess_str.encode("utf-8")).hexdigest() == password_hash:
-            return_dict[index] = guess_str
-            return
+    for length in range(1, max_length + 1):
+        for attempt in itertools.product(char_set, repeat=length):
+            attempt_password = "".join(attempt)
+            if hash_password(attempt_password, method) == hashed_password:
+                return attempt_password
+    return None
 
 
-def crack_password_parallel(password, method="md5", url=PASSWORD_LIST_URL):
+def crack_password_parallel(password, method="md5", url=None):
     """
-    Attempts to crack the password using parallel brute-force processing.
+    Attempt to crack the password using both dictionary and brute-force attacks.
     """
-    chars = string.ascii_lowercase + string.digits + string.punctuation
-    length = len(password)
-    password_hash = hashlib.md5(password.encode("utf-8")).hexdigest()
-
-    # Record the start time
+    hashed_password = hash_password(password, method)
+    char_set = check_password_type(password)
     start_time = time.time()
 
-    # First try the dictionary attack
-    result = dictionary_attack(password_hash, method, url)
-    if result:
-        # Record end time and calculate duration
-        end_time = time.time()
-        duration = end_time - start_time
-        return result, duration
+    # Attempt dictionary attack first
+    cracked_password = dictionary_attack(hashed_password, method)
+    if cracked_password:
+        duration = time.time() - start_time
+        return cracked_password, duration
 
-    # If not found, perform parallel brute-force attack
-    manager = multiprocessing.Manager()
-    return_dict = manager.dict()
-    jobs = []
-    num_workers = multiprocessing.cpu_count()
+    # Fall back to brute-force attack
+    max_length = len(password)
+    pool = Pool(processes=cpu_count())
 
-    # Create and start worker processes
-    for i in range(num_workers):
-        p = multiprocessing.Process(
-            target=worker,
-            args=(chars, password_hash, method, length, i, num_workers, return_dict, i),
-        )
-        jobs.append(p)
-        p.start()
+    result = pool.apply_async(
+        brute_force_attack, (hashed_password, char_set, max_length, method)
+    )
+    cracked_password = result.get()
 
-    # Wait for all worker processes to finish
-    for p in jobs:
-        p.join()
-
-    # Record end time and calculate duration
-    end_time = time.time()
-    duration = end_time - start_time
-
-    # Check results from the processes
-    for i in range(num_workers):
-        if i in return_dict:
-            return return_dict[i], duration
-
-    return None, duration
+    duration = time.time() - start_time
+    return cracked_password, duration
 
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    """
-    Route handler for the main page. Processes password submissions and displays results.
-    """
     cracked_password = None
     duration = None
+
     if request.method == "POST":
         password = request.form["password"]
-        method = request.form.get("method", "md5")
-        result, duration = crack_password_parallel(password, method, PASSWORD_LIST_URL)
-        cracked_password = result
-        # Format duration to two decimal places
-        if duration is not None:
-            duration = f"{duration:.2f}"
-        return render_template(
-            "index.html", cracked_password=cracked_password, duration=duration
-        )
-    return render_template("index.html")
+        method = request.form["method"]
+        cracked_password, duration = crack_password_parallel(password, method)
+
+    return render_template(
+        "index.html", cracked_password=cracked_password, duration=round(duration, 2)
+    )
 
 
 if __name__ == "__main__":
-    # Run the Flask application in debug mode
     app.run(debug=True)
