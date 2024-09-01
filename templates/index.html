@@ -18,7 +18,7 @@
 
     <!-- Content Container -->
     <div
-      class="bg-gradient-to-r from-gray-900 to-gray-600 p-8 rounded-lg shadow-lg w-full max-w-md flex flex-col gap-3 z-10 relative"
+      class="bg-gradient-to-r from-gray-900 to-gray-600 p-10 rounded-lg shadow-lg w-full max-w-lg flex flex-col gap-3 z-10 relative"
     >
       <h1
         class="text-4xl font-bold mb-4 tracking-widest text-green-500 text-center"
@@ -58,7 +58,7 @@
             name="method"
             required
             autocomplete="off"
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            class="cursor-pointer mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           >
             <option value="method1" class="tracking-widest">Method 1</option>
             <option value="method2" class="tracking-widest">Method 2</option>
@@ -93,7 +93,7 @@
 
           const resultDiv = document.getElementById("result");
           if (data.cracked_password) {
-            resultDiv.innerHTML = `<p>Password: ${data.cracked_password}</p><p>Duration: ${data.duration} seconds</p><p id="countdown"></p>`;
+            resultDiv.innerHTML = `<p>Password: ${data.cracked_password}</p><p>Time: ${data.duration} seconds</p><p id="countdown"></p>`;
             startCountdown(15); // Start the countdown from 15 seconds
           } else {
             resultDiv.innerHTML = `<p>Error: ${data.message}</p>`;

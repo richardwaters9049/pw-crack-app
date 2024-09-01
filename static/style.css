@@ -29,6 +29,6 @@ body {
 p {
   color: white;
   font-family: "Courier New", Courier, monospace;
-  letter-spacing: 2px;
-  font-size: 1rem;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
 }
