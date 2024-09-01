@@ -1,10 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* @font-face {
   font-family: "ComputerFont";
   src: url("../public/fonts/retro_computer_personal_use.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 } */
+
+h1,
+label,
+button {
+  font-family: "Retro Computer";
+}
+
+p {
+  color: rgb(39, 221, 39);
+  font-size: 16px;
+}

@@ -1,10 +1,15 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './templates/**/*.html',
-    './static/**/*.js',
+    "./src/**/*.{html,js}", // adjust these paths to your actual files
+    "./public/**/*.{html,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'computer': ['Retro Computer', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
