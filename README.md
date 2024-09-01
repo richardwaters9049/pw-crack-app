@@ -6,10 +6,15 @@
 
 - [Project Overview](#project-overview)
 - [What the Application Does](#what-the-application-does)
-- [How the GitHub Link is Used](#how-the-github-link-is-used)
-- [Types of Attacks Implemented](#types-of-attacks-implemented)
+- [Character Type Optimization](#character-type-optimization)
+- [How It Relates to Cybersecurity](#hwow-it-relates-to-cybersecurity)
+- [Implementation Details](#implementation-details)
+- [Attacks Used](#attacks-used)
+- [Features](#features)
+- [Dependencies](#dependencies)
 - [Setup Instructions](#setup-instructions)
-- [Contributing and License](#contributing-and-license)
+- [Acknowledgments](#acknowledgments)
+- [Summary](#summary)
 - [Conclusion](#conclusion)
 - [Future Enhancements](#future-enhancements)
 
