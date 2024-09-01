@@ -1,5 +1,18 @@
 # Password Cracker Web Application
 
+![Password Crack](/public/images/img.png "Matrix Style")
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [What the Application Does](#what-the-application-does)
+- [How the GitHub Link is Used](#how-the-github-link-is-used)
+- [Types of Attacks Implemented](#types-of-attacks-implemented)
+- [Setup Instructions](#setup-instructions)
+- [Contributing and License](#contributing-and-license)
+- [Conclusion](#conclusion)
+- [Future Enhancements](#future-enhancements)
+
 ## Project Overview
 
 This project is a web application designed to demonstrate password-cracking techniques, specifically through a combination of dictionary attacks and brute-force methods. The application is built using Flask, a lightweight Python web framework, and utilizes Python's standard libraries for hashing and multiprocessing. It also integrates Tailwind CSS for styling to ensure a modern and responsive user interface.
