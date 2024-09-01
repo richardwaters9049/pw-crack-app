@@ -7,7 +7,6 @@
 - [Project Overview](#project-overview)
 - [What the Application Does](#what-the-application-does)
 - [Character Type Optimization](#character-type-optimization)
-- [How It Relates to Cybersecurity](#hwow-it-relates-to-cybersecurity)
 - [Implementation Details](#implementation-details)
 - [Attacks Used](#attacks-used)
 - [Features](#features)
