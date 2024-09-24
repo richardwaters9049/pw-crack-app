@@ -1,4 +1,4 @@
-#!/Users/richyrose/Documents/GitHub/Python/pw-crack-app/venv/bin/python3.11
+#!/Users/richyrose/Documents/GitHub/Python/pw-crack-app/venv/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys
