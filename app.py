@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from tasks import crack_password_task
 import time  # Import the time module
+import os  # Import os module for environment variables
 
 app = Flask(__name__)
 
@@ -42,4 +43,6 @@ def crack_password():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    # Bind to 0.0.0.0 and use the PORT environment variable
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port, debug=False)  # Bind to 0.0.0.0
