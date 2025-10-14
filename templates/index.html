@@ -94,7 +94,7 @@
           const resultDiv = document.getElementById("result");
           if (data.cracked_password) {
             resultDiv.innerHTML = `<p>Password: ${data.cracked_password}</p><p>Time: ${data.duration} seconds</p><p id="countdown"></p>`;
-            startCountdown(15); // Start the countdown from 15 seconds
+            startCountdown(10); // Start the countdown from 10 seconds
           } else {
             resultDiv.innerHTML = `<p>Error: ${data.message}</p>`;
           }
