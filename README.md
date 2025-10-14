@@ -1,21 +1,25 @@
 # Password Cracker Web Application
 
-![Password Crack](/public/images/img.png "Matrix Style")
+<!-- ![Password Crack](/public/images/img.png "Matrix Style") -->
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [What the Application Does](#what-the-application-does)
-- [Character Type Optimization](#character-type-optimization)
-- [Implementation Details](#implementation-details)
-- [Attacks Used](#attacks-used)
-- [Features](#features)
-- [Dependencies](#dependencies)
-- [Setup Instructions](#setup-instructions)
-- [Acknowledgments](#acknowledgments)
-- [Summary](#summary)
-- [Conclusion](#conclusion)
-- [Future Enhancements](#future-enhancements)
+- [Password Cracker Web Application](#password-cracker-web-application)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [What the Application Does](#what-the-application-does)
+  - [Character Type Optimization](#character-type-optimization)
+    - [How It Relates to Cybersecurity](#how-it-relates-to-cybersecurity)
+  - [Implementation Details](#implementation-details)
+    - [GitHub Password List Integration](#github-password-list-integration)
+    - [Attacks Used](#attacks-used)
+    - [Features](#features)
+    - [Dependencies](#dependencies)
+    - [Setup Instructions](#setup-instructions)
+    - [Acknowledgments](#acknowledgments)
+    - [Summary](#summary)
+    - [Conclusion](#conclusion)
+    - [Future Enhancements](#future-enhancements)
 
 ## Project Overview
 
