@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, render_template
-from tasks import crack_password_task
-import time  # Import the time module
-import os  # Import os module for environment variables
+import subprocess
+import json
+import time
+import os
 
 app = Flask(__name__)
 
@@ -16,30 +17,55 @@ def crack_password():
     data = request.json
     password = data.get("password")
     method = data.get("method")
-    start_time = time.time()  # Now `time` is defined
+    start_time = time.time()
 
-    # Submit task to Celery
-    task = crack_password_task.delay(password, method)
-
-    # Wait for the task to complete
-    cracked_password, success = task.get(timeout=300)  # 5 minutes timeout for the task
-
-    duration = time.time() - start_time
-
-    if not success:
+    try:
+        # Call worker.py directly instead of using Celery
+        result = subprocess.run(
+            ["python3", "worker.py", password, method],
+            capture_output=True,
+            text=True,
+            timeout=300,  # 5 minutes timeout
+        )
+        
+        if result.returncode == 0:
+            result_json = json.loads(result.stdout)
+            cracked_password = result_json.get("password")
+            duration = time.time() - start_time
+            
+            return jsonify(
+                {"cracked_password": cracked_password, "duration": round(duration, 2)}
+            )
+        else:
+            return (
+                jsonify(
+                    {
+                        "status": "error",
+                        "message": "Failed to crack the password.",
+                    }
+                ),
+                500,
+            )
+    except subprocess.TimeoutExpired:
         return (
             jsonify(
                 {
                     "status": "error",
-                    "message": "Failed to crack the password or process timed out.",
+                    "message": "Process timed out.",
                 }
             ),
             500,
         )
-
-    return jsonify(
-        {"cracked_password": cracked_password, "duration": round(duration, 2)}
-    )
+    except json.JSONDecodeError:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Error decoding result.",
+                }
+            ),
+            500,
+        )
 
 
 if __name__ == "__main__":
