@@ -23,14 +23,18 @@
 
 ## Project Overview
 
-This project is a web application designed to demonstrate password-cracking techniques, specifically through a combination of dictionary attacks and brute-force methods. The application is built using Flask, a lightweight Python web framework, and utilizes Python's standard libraries for hashing and multiprocessing. It also integrates Tailwind CSS for styling to ensure a modern and responsive user interface.
+This project is a web application designed to demonstrate password-cracking techniques. The application is built using Flask, a lightweight Python web framework, with a retro Matrix-style interface. It features a simple architecture that runs password cracking operations directly through subprocess calls, making it easy to deploy and run locally.
 
 ## What the Application Does
 
-The application allows users to input a password and then attempts to crack it by:
+The application provides a retro Matrix-themed interface where users can:
 
-1. **Dictionary Attack**: Uses a large list of common passwords fetched from an online source.
-2. **Brute-Force Attack**: Iterates through all possible combinations of characters to find a match, leveraging parallel processing to speed up the process.
+1. Enter a password to test
+2. Select a cracking method (Method 1 or Method 2)
+3. View the cracked password and time taken
+4. Experience a cool Matrix rain effect during processing
+
+The backend processes password cracking requests through a simple worker script that can be extended with various cracking techniques such as dictionary attacks or brute-force methods.
 
 ## Character Type Optimization
 
@@ -74,33 +78,66 @@ This approach ensures that the application uses a comprehensive and up-to-date s
 
 ### Dependencies
 
-- **Flask**: Web framework for Python.
-- **Requests**: Library for making HTTP requests to fetch the password list.
-- **Tailwind CSS**: Utility-first CSS framework for styling.
-- **Python Standard Libraries**: `hashlib`, `itertools`, `string`, and `multiprocessing` for password cracking functionalities.
+- **Flask**: Web framework for Python
+- **Gunicorn**: Production WSGI server (for deployment)
+- **Tailwind CSS**: Utility-first CSS framework (loaded via CDN)
+- **Python Standard Libraries**: `subprocess`, `json`, `time` for password cracking operations
 
 ### Setup Instructions
 
+#### Quick Start (3 Steps)
+
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/pw-crack-app.git
+   git clone https://github.com/richardwaters9049/pw-crack-app.git
    cd pw-crack-app
    ```
-2. **Create and Activate a Virtual Environment**:
+
+2. **Create Virtual Environment and Install Dependencies**:
    ```bash
    python3 -m venv venv
-   source venv/bin/activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
    ```
-3. **Install Dependencies**:
-   ```bash
-   pip3 install flask requests
-   ```
-4. **Run the Application**:
+
+3. **Run the Application**:
    ```bash
    python3 app.py
    ```
-5. **Access the Web Interface**:
-   Open a web browser and navigate to http://127.0.0.1:5000
+
+4. **Access the Web Interface**:
+   - Open your browser and navigate to: **http://127.0.0.1:5000**
+   - Enter a password and select a cracking method
+   - Click "Crack Password" to see the results!
+
+#### Alternative: Run with Virtual Environment Python
+
+```bash
+# After step 2 above, you can also run:
+venv/bin/python app.py
+```
+
+#### For Production Deployment
+
+```bash
+gunicorn app:app
+```
+
+### Project Structure
+
+```text
+pw-crack-app/
+├── app.py                 # Main Flask application
+├── worker.py              # Password cracking logic
+├── requirements.txt       # Python dependencies
+├── Procfile              # Deployment configuration
+├── static/
+│   ├── fonts/            # Custom Retro Computer font
+│   ├── style.css         # Custom styles
+│   └── matrix.js         # Matrix rain effect
+└── templates/
+    └── index.html        # Main web interface
+```
 
 ### Acknowledgments
 
