@@ -1,8 +1,17 @@
+/* Font Face Declaration */
+@font-face {
+  font-family: "Retro Computer";
+  src: url("/static/fonts/retro_computer_personal_use.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Global Styles */
 body {
   margin: 0;
   overflow: hidden;
-  font-family: "Retro Computer";
+  font-family: "Retro Computer", "Courier New", monospace;
 }
 
 /* Matrix Background */
@@ -21,14 +30,14 @@ body {
   position: absolute;
   bottom: 100%;
   color: #0f0;
-  font-family: "Retro Computer";
+  font-family: "Retro Computer", "Courier New", monospace;
   white-space: nowrap;
   font-size: 1rem; /* Reduced font size for denser appearance */
 }
 
 p {
   color: white;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Retro Computer", "Courier New", monospace;
   letter-spacing: 1px;
   font-size: 1.2rem;
 }
