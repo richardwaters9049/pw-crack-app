@@ -1,15 +1,19 @@
-# Exclude CSS files (mostly styling for Matrix effect)
+# Ignore CSS files
 *.css linguist-vendored
 static/*.css linguist-vendored
 
-# Exclude JS files (if any frontend scripts)
+# Ignore JS files
 *.js linguist-vendored
 static/*.js linguist-vendored
+
+# Ignore HTML templates (Flask frontend)
+*.html linguist-vendored
+templates/*.html linguist-vendored
 
 # Keep Python files counted normally
 *.py linguist-language=Python
 
-# Optional: ignore images from language stats
+# Ignore images
 *.png linguist-vendored
 *.jpg linguist-vendored
 *.gif linguist-vendored
