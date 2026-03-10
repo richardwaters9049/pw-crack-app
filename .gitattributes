@@ -1,0 +1,16 @@
+# Exclude CSS files (mostly styling for Matrix effect)
+*.css linguist-vendored
+static/*.css linguist-vendored
+
+# Exclude JS files (if any frontend scripts)
+*.js linguist-vendored
+static/*.js linguist-vendored
+
+# Keep Python files counted normally
+*.py linguist-language=Python
+
+# Optional: ignore images from language stats
+*.png linguist-vendored
+*.jpg linguist-vendored
+*.gif linguist-vendored
+static/images/* linguist-vendored
