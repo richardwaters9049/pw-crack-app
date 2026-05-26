@@ -73,6 +73,12 @@
             <option value="method2" class="tracking-widest">Method 2</option>
           </select>
         </div>
+        <p
+          id="method-description"
+          class="text-sm text-green-400 tracking-widest text-center italic"
+        >
+          Dictionary attack — tests your password against a list of commonly used passwords.
+        </p>
         <button
           type="submit"
           class="w-full px-4 py-2 bg-green-500 text-white font-bold rounded-md hover:bg-red-700 text-xl tracking-widest"
@@ -85,6 +91,16 @@
 
     <script src="/static/matrix.js"></script>
     <script>
+      const methodDescriptions = {
+        method1: "Dictionary attack — tests your password against a list of commonly used passwords.",
+        method2: "Brute-force attack — systematically tries all possible character combinations."
+      };
+
+      document.getElementById("method").addEventListener("change", function () {
+        document.getElementById("method-description").textContent =
+          methodDescriptions[this.value];
+      });
+
       async function submitForm() {
         const form = document.getElementById("crack-form");
         const password = document.getElementById("password").value;
