@@ -81,15 +81,11 @@
           <p
             id="method-title"
             class="text-m text-green-400 tracking-widest text-center mb-3"
-          >
-            Dictionary attack
-          </p>
+          ></p>
           <p
             id="method-description"
             class="text-sm text-green-400 tracking-widest text-center"
-          >
-            Tests your input against a list of commonly used passwords
-          </p>
+          ></p>
         </div>
         <button
           type="submit"
@@ -114,11 +110,14 @@
         },
       };
 
-      document.getElementById("method").addEventListener("change", function () {
-        const selected = methods[this.value];
+      function updateMethodDescription() {
+        const selected = methods[document.getElementById("method").value];
         document.getElementById("method-title").textContent = selected.title;
         document.getElementById("method-description").textContent = selected.description;
-      });
+      }
+
+      document.getElementById("method").addEventListener("change", updateMethodDescription);
+      updateMethodDescription();
 
       async function submitForm() {
         const form = document.getElementById("crack-form");
