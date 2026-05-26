@@ -79,7 +79,7 @@
 
         <div class="method-desc-container">
           <p
-            id="method-description"
+            id="method-title"
             class="text-m text-green-400 tracking-widest text-center mb-3"
           >
             Dictionary attack
@@ -103,16 +103,21 @@
 
     <script src="/static/matrix.js"></script>
     <script>
-      const methodDescriptions = {
-        method1:
-          "Dictionary attack — tests your password against a list of commonly used passwords.",
-        method2:
-          "Brute-force attack — systematically tries all possible character combinations.",
+      const methods = {
+        method1: {
+          title: "Dictionary attack",
+          description: "Tests your input against a list of commonly used passwords",
+        },
+        method2: {
+          title: "Brute-force attack",
+          description: "Systematically tries all possible character combinations",
+        },
       };
 
       document.getElementById("method").addEventListener("change", function () {
-        document.getElementById("method-description").textContent =
-          methodDescriptions[this.value];
+        const selected = methods[this.value];
+        document.getElementById("method-title").textContent = selected.title;
+        document.getElementById("method-description").textContent = selected.description;
       });
 
       async function submitForm() {
